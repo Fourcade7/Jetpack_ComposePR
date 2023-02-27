@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pr7.jetpack_compose.JC_3_Text_Customization.ui.theme.Jetpack_ComposeTheme
+import com.pr7.jetpack_compose.JC_3_Text_Customization.ui.theme.Shapes
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,24 +135,24 @@ fun prtextsubscriptandsuperscript() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun prcustomtextwithsurface() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+   Column(
+       modifier = Modifier.fillMaxSize(),
+       verticalArrangement = Arrangement.Center,
+       horizontalAlignment = Alignment.CenterHorizontally
+   ) {
+    Surface(
+        modifier = Modifier.size(150.dp),
+        color = Color.LightGray,
+        shape = RoundedCornerShape(15.dp)
     ) {
-        Surface(
-            modifier = Modifier.size(100.dp),
-            color = Color.LightGray,
-            shape = RoundedCornerShape(15.dp)
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "AXaxa")
-            }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Text(text = "Click me")
         }
 
     }
+   }
 
 }
