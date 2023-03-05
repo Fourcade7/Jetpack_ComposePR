@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,7 +19,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Jetpack_Compose" />
         <activity
-            android:name=".JC_7_Expandable_Cardview.MainActivity"
+            android:name=".JC_9_Text_Animation.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Jetpack_Compose">
