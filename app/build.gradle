@@ -61,5 +61,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
+    //Coil image library
     implementation("io.coil-kt:coil-compose:2.2.2")
+    //Navigation in Jetpack Compose
+    def nav_version = "2.5.3"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 }
