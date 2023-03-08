@@ -33,7 +33,7 @@ fun AdobeScreen(
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier.clickable {
-                navHostController.navigate(NameScreens.Youtube.route)
+                navHostController.navigate(route = NameScreens.Youtube.passNamdAndId(1,"Fourcade"))
             }
 
         )

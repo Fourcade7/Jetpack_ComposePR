@@ -17,14 +17,16 @@ import com.pr7.jetpack_compose.JC_13_Navigation_Send_Multiple_Arguments.ui.theme
 
 @Composable
 fun YoutubeScreen(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    id:Int,
+    name:String
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
         Text(
-            text = "Youtube",
+            text = "Youtube $id $name",
             color = YoutubeCustomColor,
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
