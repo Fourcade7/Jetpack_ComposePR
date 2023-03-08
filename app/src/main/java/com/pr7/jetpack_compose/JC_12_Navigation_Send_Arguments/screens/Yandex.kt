@@ -1,6 +1,5 @@
-package com.pr7.jetpack_compose.JC_11_Navigation_Basic.screens
+package com.pr7.jetpack_compose.JC_12_Navigation_Send_Arguments.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,34 +8,30 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import com.pr7.jetpack_compose.JC_11_Navigation_Basic.Screen
+import androidx.navigation.NavHostController
+import com.pr7.jetpack_compose.JC_12_Navigation_Send_Arguments.ui.theme.YandexCustomColor
 
 
 @Composable
-fun DetailScreen(
-    navController: NavController
+fun YandexScreen(
+    navHostController: NavHostController
 ) {
     Box(
-        modifier = Modifier.fillMaxSize().background(Color.White),
-        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ){
         Text(
-            text = "Detail",
-            color = MaterialTheme.colors.secondary,
+            text = "Yandex",
+            color = YandexCustomColor,
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable {
-                //navController.popBackStack()
-                navController.navigate(Screen.Home.route){
-                    popUpTo(Screen.Home.route){inclusive=true}
-
+                navHostController.navigate(Scrrens.Google.route){
+                    popUpTo(Scrrens.Google.route){inclusive=true}
                 }
             }
         )
     }
-
 }
