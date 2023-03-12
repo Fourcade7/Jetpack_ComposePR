@@ -3,6 +3,7 @@ package com.pr7.jetpack_compose.JC_14_Bottom_Navigation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -16,8 +17,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           MainScreen()
+            prmainscren()
         }
+    }
+}
+
+
+@Composable
+fun prmainscren() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(text = "This is Bottom Navigation")
+        MainScreen()
     }
 }
 
