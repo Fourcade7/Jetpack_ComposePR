@@ -106,7 +106,8 @@ fun prcustomsearch() {
                            text = "Search",
                            color = Color.LightGray
                        )
-                   }
+                   },
+                   colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent)
                )
            }
        }
