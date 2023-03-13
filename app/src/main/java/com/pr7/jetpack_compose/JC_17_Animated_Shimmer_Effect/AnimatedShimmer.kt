@@ -1,5 +1,6 @@
 package com.pr7.jetpack_compose.JC_17_Animated_Shimmer_Effect
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -75,6 +76,16 @@ fun ShimmerGridItem(brush: Brush) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun ShimmerGradientPreview() {
+    ShimmerGridItem(brush = Brush.linearGradient(listOf(
+        Color.LightGray.copy(alpha = 0.6f),
+        Color.LightGray.copy(alpha = 0.2f),
+        Color.LightGray.copy(alpha = 0.6f)
+    )))
+}
+
+@Preview(showSystemUi = true, showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ShimmerGradientDarkPreview() {
     ShimmerGridItem(brush = Brush.linearGradient(listOf(
         Color.LightGray.copy(alpha = 0.6f),
         Color.LightGray.copy(alpha = 0.2f),
