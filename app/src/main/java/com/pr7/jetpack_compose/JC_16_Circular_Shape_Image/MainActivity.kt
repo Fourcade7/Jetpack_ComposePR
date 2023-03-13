@@ -46,10 +46,16 @@ class MainActivity : ComponentActivity() {
 fun prcircularshapeimageview() {
     Column() {
         Image(
-
             painter = painterResource(id = R.drawable.img),
             contentDescription ="",
-            modifier = Modifier
+            modifier =
+
+
+
+
+
+
+            Modifier
                 .size(150.dp)
                 //.clip(CircleShape),
                 .clip(RoundedCornerShape(size = 50.dp))
