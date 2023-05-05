@@ -91,9 +91,11 @@ fun prgooglebutton() {
                     .fillMaxWidth(),
                     contentAlignment = Alignment.CenterEnd
 
+
                 ){
                     if (visibleprogressbar){
                         CircularProgressIndicator(modifier = Modifier.size(30.dp))
+                        // modifier = Modifier.clip(CircleShape).align(Alignment.CenterEnd)
                     }
                 }
 

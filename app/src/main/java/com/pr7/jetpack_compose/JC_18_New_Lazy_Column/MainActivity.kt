@@ -1,5 +1,6 @@
 package com.pr7.jetpack_compose.JC_18_New_Lazy_Column
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -49,6 +50,7 @@ class MainActivity : ComponentActivity() {
 
 
 
+@SuppressLint("UnrememberedMutableState")
 @ExperimentalFoundationApi
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
@@ -64,11 +66,13 @@ fun prnewlazycolumn() {
 
         ))
     }
+    val arraylist:ArrayList<String> by mutableStateOf(ArrayList<String>())
+    arraylist.add("xaxaxax")
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ){
-        items(items=items, key = {it}){
+        items(items=arraylist, key = {it}){
             Text(
                 text = it,
                 modifier = Modifier
@@ -81,7 +85,8 @@ fun prnewlazycolumn() {
                         )
                     ),
                 fontSize = MaterialTheme.typography.h5.fontSize,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+
             )
         }
         item {
