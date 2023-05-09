@@ -104,8 +104,6 @@ fun lazyitem(user: User) {
                 .fillMaxWidth()
                 .wrapContentHeight()
             //.background(Color.Black),
-
-
         ) {
             Card(
                 modifier = Modifier
