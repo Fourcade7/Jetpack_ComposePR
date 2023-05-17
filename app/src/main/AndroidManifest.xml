@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Jetpack_Compose"
         tools:targetApi="31">
         <activity
-            android:name=".JC_23_DataStore.MainActivity"
+            android:name=".JC_25_LazyGrid.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Jetpack_Compose">
@@ -25,17 +25,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".JC_22_Scroll_Parallax.MainActivity"
+            android:name=".JC_24_Horizontal_Vertical_Pager.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Jetpack_Compose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".JC_23_DataStore.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Jetpack_Compose"></activity>
+        <activity
+            android:name=".JC_22_Scroll_Parallax.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Jetpack_Compose" />
         <activity
             android:name=".JC_21_Animated_Splash_Screen.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Jetpack_Compose"></activity>
+            android:theme="@style/Theme.Jetpack_Compose" />
         <activity
             android:name=".JC_20_New_NavigationBar.MainActivity"
             android:exported="true"
