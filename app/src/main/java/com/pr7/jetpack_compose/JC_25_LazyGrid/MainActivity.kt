@@ -1,5 +1,5 @@
 @file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
-    ExperimentalFoundationApi::class
+    ExperimentalFoundationApi::class, ExperimentalFoundationApi::class
 )
 
 package com.pr7.jetpack_compose.JC_25_LazyGrid
@@ -73,7 +73,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun prlazygrid(imagearraylist:ArrayList<Int>) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 108.dp)
+        columns = GridCells.Fixed(3)
+        //columns = GridCells.Adaptive(minSize = 108.dp)
     ) {
 //        items(10,key = null){
 //           lazyitem()
@@ -116,7 +117,7 @@ fun lazyitem(image:Int) {
                        contentScale = ContentScale.Crop,
                        modifier = Modifier
                            .fillMaxWidth()
-                           .height(((100 until 400).random()).dp)
+                           .height(((50 until 400).random()).dp)
                    )
                    Text(
                        modifier = Modifier
@@ -131,4 +132,13 @@ fun lazyitem(image:Int) {
     }
 
 }
-
+/*
+* LazyVerticalGrid(
+    columns = GridCells.Fixed(2),
+    verticalArrangement = Arrangement.spacedBy(16.dp),
+    horizontalArrangement = Arrangement.spacedBy(16.dp)
+) {
+    items(photos) { item ->
+        PhotoItem(item)
+    }
+}*/
