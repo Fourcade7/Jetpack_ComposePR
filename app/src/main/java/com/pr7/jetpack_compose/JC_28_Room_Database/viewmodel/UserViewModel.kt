@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.pr7.jetpack_compose.JC_28_Room_Database.data.repository.UserRepository
 import com.pr7.jetpack_compose.JC_28_Room_Database.data.room.AppDatabase
@@ -23,13 +24,15 @@ class UserViewModel constructor(
     var mutableLiveData=MutableLiveData<List<User>>()
 
     fun getAllUsers(): MutableLiveData<List<User>> {
-
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.getAllUsers().collect{
                 mutableLiveData.postValue(it)
             }
         }
         return mutableLiveData
+    }
+    fun getAllUsersconvert(): LiveData<List<User>> {
+        return userRepository.getAllUsers().asLiveData(context=Dispatchers.IO)
     }
    fun save(user: User){
        viewModelScope.launch(Dispatchers.IO) {
