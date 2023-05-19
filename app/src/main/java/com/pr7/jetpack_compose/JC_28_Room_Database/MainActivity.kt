@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,9 +17,11 @@ import com.pr7.jetpack_compose.JC_28_Room_Database.data.room.AppDatabase
 import com.pr7.jetpack_compose.JC_28_Room_Database.data.room.User
 import com.pr7.jetpack_compose.JC_28_Room_Database.data.room.UserDao
 import com.pr7.jetpack_compose.JC_28_Room_Database.ui.theme.Jetpack_ComposeTheme
+import com.pr7.jetpack_compose.JC_28_Room_Database.viewmodel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     lateinit var userDao: UserDao
+    val userViewModel:UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userDao= AppDatabase.getInstance(this@MainActivity).userDao()
@@ -34,6 +37,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        userViewModel.save(User(uid = 0, name = "Guillermo Maddox", surname = "Deana Roach"))
+        userViewModel.getAllUsers().observe(this@MainActivity,{
+            Log.d("PR77777", "onCreate: ${it.get(10).name}")
+        })
+
 
 
     }
