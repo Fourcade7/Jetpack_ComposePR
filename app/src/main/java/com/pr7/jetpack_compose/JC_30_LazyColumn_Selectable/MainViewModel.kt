@@ -18,14 +18,16 @@ class MainViewModel constructor():ViewModel() {
         mutableLiveData.value=emptyarraylist
 
     }
-    fun deleteitem(laptop: Laptop){
-        val emptyarraylist=ArrayList(mutableLiveData.value.orEmpty())
-        emptyarraylist.remove(laptop)
-        mutableLiveData.value?.removeAll(emptyarraylist)
+    fun deleteitem(laptop: Laptop) {
+
+        mutableLiveData.value =
+            mutableLiveData.value?.filter { it.name != laptop.name } as ArrayList<Laptop>?
+
     }
 
 
-    //use flow
+
+        //use flow
     val mutablestateflow= MutableStateFlow(ArrayList<Laptop>())
 
     fun insertitem(laptop: Laptop){
@@ -34,9 +36,8 @@ class MainViewModel constructor():ViewModel() {
         mutablestateflow.value=emptyarraylist
     }
     fun removeitem(laptop: Laptop){
-        val emptyarraylist=mutablestateflow.value
-        emptyarraylist.remove(laptop)
-        mutablestateflow.value=emptyarraylist
+
+        mutablestateflow.value=mutablestateflow.value.filter {  it.name != laptop.name} as ArrayList<Laptop>
 
     }
 

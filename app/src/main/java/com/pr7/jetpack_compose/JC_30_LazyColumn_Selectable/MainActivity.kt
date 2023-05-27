@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pr7.jetpack_compose.JC_30_LazyColumn_Selectable.ui.theme.CardBackground
@@ -100,7 +101,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun multiselectionLazyColumn(array: Array<Laptop>,mainViewModel: MainViewModel,selectedarraylist:ArrayList<Laptop>){
     Column() {
-        Text(text =selectedarraylist.size.toString())
+        Text(buildAnnotatedString {
+        selectedarraylist.forEach {
+            append("${it.name} ")
+
+        }
+        })
         LazyColumn(){
             itemsIndexed(items =array ){index: Int, item: Laptop ->
                 lazyselectitem(item = item,mainViewModel)
