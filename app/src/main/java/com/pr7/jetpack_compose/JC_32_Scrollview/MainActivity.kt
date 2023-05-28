@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingPreview2()
+                    scrollv()
                 }
             }
         }
@@ -55,6 +55,6 @@ private fun ScrollBoxes() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview2() {
+fun scrollv() {
     ScrollBoxes()
 }
