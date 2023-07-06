@@ -1,4 +1,6 @@
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
+    ExperimentalFoundationApi::class
+)
 
 package com.pr7.jetpack_compose.JC_35_Onboarding_Screen_With_HorizontalPager
 
@@ -58,7 +60,13 @@ class MainActivity : ComponentActivity() {
                         R.drawable.youtube,
 
                         )
-                    onboardingscreen(images)
+                    val desc= arrayOf(
+                        "Welcome",
+                        "to",
+                        "My",
+                        "App",
+                    )
+                    onboardingscreen(images,desc)
                 }
             }
         }
@@ -69,14 +77,14 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun onboardingscreen(array: Array<Int>) {
+fun onboardingscreen(array: Array<Int>,arraydesc: Array<String>) {
     val pagerState = rememberPagerState { array.size }
     val scope= rememberCoroutineScope()
     Column() {
         HorizontalPager(
             state = pagerState
         ) {
-            onboarditem(page = it, pagerState = pagerState, array = array)
+            onboarditem(page = it, pagerState = pagerState, array = array,arraydesc)
         }
 
         Button(onClick = {
@@ -91,12 +99,18 @@ fun onboardingscreen(array: Array<Int>) {
             Text(text = "Go")
 
         }
+        Text(
+            text = if (pagerState.currentPage<arraydesc.size) arraydesc[pagerState.currentPage] else "WELCOME",
+            modifier = Modifier
+                .align(CenterHorizontally)
+                .padding(top = 15.dp),
+            fontSize = 30.sp)
     }
 }
 
 
 @Composable
-fun onboarditem(page:Int,pagerState: PagerState,array: Array<Int>) {
+fun onboarditem(page:Int,pagerState: PagerState,array: Array<Int>,arraydesc: Array<String>) {
     Column() {
 
         Card(
