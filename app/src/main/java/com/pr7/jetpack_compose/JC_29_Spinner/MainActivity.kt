@@ -121,9 +121,6 @@ fun mainspinner() {
                                             modifier = Modifier.align(Alignment.CenterEnd)
                                         )
                                     }
-
-
-
                             }
 
                             }

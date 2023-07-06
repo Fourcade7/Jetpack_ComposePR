@@ -8,6 +8,7 @@ package com.pr7.jetpack_compose.JC_33_HorizontalPager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,11 +23,13 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize.Fill.calculateMainAxisPageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,7 +66,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //horizontalpager()
+                    horizontalpager()
 
                     val images = arrayOf(
                         R.drawable.adobe,
@@ -74,7 +78,7 @@ class MainActivity : ComponentActivity() {
                         R.drawable.youtube,
 
                         )
-                    horizontalimageslider(images)
+                    //horizontalimageslider(images)
                 }
             }
         }
@@ -85,22 +89,29 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun horizontalpager() {
     val pagerState = rememberPagerState { 10 }
+    Column() {
+        HorizontalPager(
+            modifier = Modifier,
+            state = pagerState
+        ) { page ->
+            Box(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .background(Color.Blue)
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                contentAlignment = Alignment.Center
+            ) {
 
-    HorizontalPager(
-        modifier = Modifier,
-        state = pagerState
-    ) { page ->
-        Box(
-            modifier = Modifier
-                .padding(10.dp)
-                .background(Color.Blue)
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(text = page.toString(), fontSize = 32.sp)
+                Text(text = page.toString(), fontSize = 52.sp)
+
+
+            }
         }
+
     }
+
+
 }
 
 

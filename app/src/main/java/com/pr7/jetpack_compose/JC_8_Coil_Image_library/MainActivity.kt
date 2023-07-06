@@ -45,7 +45,6 @@ class MainActivity : ComponentActivity() {
 fun prcoilimagelibrary() {
     Column(modifier = Modifier.fillMaxSize()) {
         AsyncImage(
-
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape),
@@ -53,7 +52,6 @@ fun prcoilimagelibrary() {
             model = "https://mgames.ua/upload/catalog_products_photos/images/s_3797_0d8qzijhd5n50xlsji4ezg6d1600529784.jpg",
             contentDescription = null,
             contentScale = ContentScale.Crop
-
 
         )
 
