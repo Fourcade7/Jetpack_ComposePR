@@ -14,6 +14,17 @@
         android:theme="@style/Theme.Jetpack_Compose"
         tools:targetApi="31">
         <activity
+            android:name=".JC_36_Tab_Ui.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Jetpack_Compose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".JC_35_Onboarding_Screen_With_HorizontalPager.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
@@ -39,12 +50,12 @@
             android:name=".JC_33_HorizontalPager.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Jetpack_Compose"></activity>
+            android:theme="@style/Theme.Jetpack_Compose" />
         <activity
             android:name=".JC_32_Scrollview.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Jetpack_Compose"></activity>
+            android:theme="@style/Theme.Jetpack_Compose" />
         <activity
             android:name=".JC_31_LazyRow.MainActivity"
             android:exported="true"
