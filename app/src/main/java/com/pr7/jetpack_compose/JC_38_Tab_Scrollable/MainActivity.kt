@@ -1,8 +1,6 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
-    ExperimentalFoundationApi::class
-)
+@file:OptIn(ExperimentalFoundationApi::class)
 
-package com.pr7.jetpack_compose.JC_36_Tab_Ui
+package com.pr7.jetpack_compose.JC_38_Tab_Scrollable
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,13 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -32,20 +30,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pr7.jetpack_compose.JC_36_Tab_Ui.ui.theme.Jetpack_ComposeTheme
+import com.pr7.jetpack_compose.JC_38_Tab_Scrollable.ui.theme.Jetpack_ComposeTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            tabui()
+            Jetpack_ComposeTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    scrollabletabui()
+                }
+            }
         }
     }
 }
@@ -53,8 +58,11 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun tabui() {
+fun scrollabletabui() {
     val tabItems = listOf(
+        TabModel("Image", Icons.Default.Add),
+        TabModel("Music", Icons.Default.Email),
+        TabModel("Video", Icons.Default.Search),
         TabModel("Image", Icons.Default.Add),
         TabModel("Music", Icons.Default.Email),
         TabModel("Video", Icons.Default.Search),
@@ -64,10 +72,10 @@ fun tabui() {
     val scope = rememberCoroutineScope()
 
     Column {
-        TabRow(
+        ScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
-
-        ) {
+            edgePadding = 0.dp
+            ) {
             tabItems.forEachIndexed { index, item ->
                 tabitem(
                     onclick = { scope.launch { pagerState.animateScrollToPage(index) } },
@@ -119,13 +127,13 @@ fun tabitem(
 
         }
     }
-    
+
 }
 
 
 data class TabModel constructor(
     val title:String,
-    val icon:ImageVector?=null
+    val icon: ImageVector?=null
 )
 
 //Screens
@@ -159,7 +167,4 @@ fun SearchTab() {
         Text(text = "Search", fontSize = 32.sp)
     }
 }
-
-
-
 

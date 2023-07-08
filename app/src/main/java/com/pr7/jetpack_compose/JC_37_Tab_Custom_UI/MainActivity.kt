@@ -2,19 +2,24 @@
     ExperimentalFoundationApi::class
 )
 
-package com.pr7.jetpack_compose.JC_36_Tab_Ui
+package com.pr7.jetpack_compose.JC_37_Tab_Custom_UI
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,22 +44,24 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pr7.jetpack_compose.JC_36_Tab_Ui.ui.theme.Jetpack_ComposeTheme
+import com.pr7.jetpack_compose.JC_12_Navigation_Send_Arguments.ui.theme.AdobeCustomColor
+import com.pr7.jetpack_compose.JC_12_Navigation_Send_Arguments.ui.theme.Shapes
+import com.pr7.jetpack_compose.JC_12_Navigation_Send_Arguments.ui.theme.YandexCustomColor
+import com.pr7.jetpack_compose.JC_37_Tab_Custom_UI.ui.theme.Jetpack_ComposeTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            tabui()
+            customtabui()
         }
     }
 }
 
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun tabui() {
+fun customtabui() {
     val tabItems = listOf(
         TabModel("Image", Icons.Default.Add),
         TabModel("Music", Icons.Default.Email),
@@ -66,8 +74,11 @@ fun tabui() {
     Column {
         TabRow(
             selectedTabIndex = pagerState.currentPage,
+            indicator = { tabPositions: List<TabPosition> ->
+                Box() {}
+            }
 
-        ) {
+            ) {
             tabItems.forEachIndexed { index, item ->
                 tabitem(
                     onclick = { scope.launch { pagerState.animateScrollToPage(index) } },
@@ -94,8 +105,7 @@ fun tabitem(
     title: String,
     icon: ImageVector? = null,
 ) {
-    val tabHeight = if (icon != null) 54.dp else 38.dp
-    val bottomPadding = if (icon != null) 5.dp else 5.dp
+
     val selectedColor = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
 
     Tab(
@@ -105,11 +115,13 @@ fun tabitem(
     ) {
         Column(
             Modifier
-                .padding(top = 10.dp, bottom = bottomPadding)
-                .height(tabHeight)
-                .fillMaxWidth(),
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(50.dp))
+                .background(if (selected) YandexCustomColor else Color.LightGray),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
             if (icon != null) Icon(icon, contentDescription = title, tint = selectedColor)
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -117,15 +129,33 @@ fun tabitem(
                 color = selectedColor
             )
 
+
+            if (selected){
+                Box(
+                    contentAlignment = Alignment.BottomCenter,
+
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(50.dp),
+                        color = AdobeCustomColor,
+                        modifier = Modifier.height(5.dp).width(40.dp)
+
+                    ) {
+
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
         }
     }
-    
+
 }
 
 
 data class TabModel constructor(
     val title:String,
-    val icon:ImageVector?=null
+    val icon: ImageVector?=null
 )
 
 //Screens
@@ -159,7 +189,4 @@ fun SearchTab() {
         Text(text = "Search", fontSize = 32.sp)
     }
 }
-
-
-
 
