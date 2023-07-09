@@ -1,26 +1,36 @@
-@file:OptIn(ExperimentalMaterialApi::class)
+@file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 
 package com.pr7.jetpack_compose.JC_39_Bottom_sheet
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
@@ -31,87 +41,73 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pr7.jetpack_compose.JC_39_Bottom_sheet.ui.theme.Jetpack_ComposeTheme
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            bottomsheetmain()
+        modalbottomsheet()
+
         }
+
     }
 }
 
-
-@Preview(showBackground = true, showSystemUi = true)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Preview
 @Composable
-fun bottomsheetmain() {
+fun modalbottomsheet() {
+    val coroutineScope = rememberCoroutineScope()
+    val modalSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
+        skipHalfExpanded = false,
+    )
+    ModalBottomSheetLayout(
+        sheetState = modalSheetState,
+        sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
 
-    var showbottomSheet by rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    var showmodalbottomsheet by rememberSaveable {
-       mutableStateOf(false)
-    }
-
-    if (showbottomSheet){
-        bottomsheetscaffold()
-    }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(onClick = {
-            showbottomSheet = !showbottomSheet
-        }) {
-            Text(text = "Show/Hide BottomSheetScaffold")
-        }
-        Button(onClick = {
-            showmodalbottomsheet = !showmodalbottomsheet
-        }) {
-            Text(text = "Show/Hide ModalBottomSheet")
-        }
-    }
-
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun bottomsheetscaffold() {
-        val scope = rememberCoroutineScope()
-        val scaffoldState = rememberBottomSheetScaffoldState()
-
-    BottomSheetScaffold(
-        scaffoldState=scaffoldState,
-        sheetPeekHeight = 140.dp,
-        backgroundColor = Color.LightGray,
-        sheetBackgroundColor = Color.DarkGray,
-        sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
         sheetContent = {
-            Row(
-                modifier = Modifier.padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(5.dp, Alignment.Start)
+            Column(
+               modifier = Modifier.height(550.dp)
             ) {
-                Icon(Icons.Default.Share, contentDescription = "Share")
-                Text(text = "Share")
-            }
+                //...
 
-            Button(onClick = { scope.launch { scaffoldState.bottomSheetState.isCollapsed } }) {
-                Text(text = "Expand BottomSheet")
+                Button(
+                    onClick = {
+                        coroutineScope.launch { modalSheetState.hide() }
+                    }
+                ) {
+                    Text(text = "Hide Sheet")
+                }
             }
-            Button(onClick = { scope.launch { scaffoldState.bottomSheetState.isCollapsed } }) {
-                Text(text = "PartialExpand BottomSheet")
+        }
+    ) {
+        Scaffold {
+            Box(
+               modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            if (modalSheetState.isVisible)
+                                modalSheetState.hide()
+                            else
+                                modalSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                        }
+                    },
+                ) {
+                    Text(text = "Open Sheet")
+                }
             }
-        }) {}
-
-
+        }
+    }
 }
-
-
 
 
 
